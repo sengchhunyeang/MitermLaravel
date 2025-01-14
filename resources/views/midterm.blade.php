@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Invoice</title>
     @vite('resources/css/app.css')
 </head>
 <body style="font-family: 'Comic Sans MS',serif">
@@ -33,8 +33,11 @@
                 </div>
             </td>
             <td class="border border-black px-4 py-2 text-center">{{ $item['discount'] }}%</td>
-            <td class="border border-black px-4 py-2 text-center">
-                ${{ number_format($item['qty'] * $item['unitPrice'] * (1 - $item['discount'] / 100), 2) }}
+            <td class="border border-black px-4 py-2">
+                <div class="flex justify-between">
+                    <span>$</span>
+                    <span>{{ number_format($item['qty'] * $item['unitPrice'] * (1 - $item['discount'] / 100), 2) }}</span>
+                </div>
             </td>
         </tr>
         @endforeach
@@ -61,25 +64,56 @@
         <tr>
             <td colspan="3" class="border border-black text-center font-bold text-black bg-blue-500">Thank you for your business!</td>
             <td class="border border-black px-4 py-2 text-right font-semibold" colspan="2">Subtotal</td>
-            <td class="border border-black px-4 py-2">${{ number_format($subtotal, 2) }}</td>
+            <td class="border border-black px-4 py-2">
+                <div class="flex justify-between">
+                    <span>$</span>
+                    <span>{{ number_format($subtotal, 2) }}</span>
+                </div>
+            </td>
+
         </tr>
         <tr>
             <td colspan="2" class="border border-black text-end font-bold">Max Price</td>
-            <td class="border border-black px-4 py-2">${{ number_format($maxPrice, 2) }}</td>
+            <td class="border border-black px-4 py-2">
+                <div class="flex justify-between">
+                    <span>$</span>
+                    <span>{{ number_format($maxPrice, 2) }}</span>
+                </div>
+            </td>
             <td class="border border-black px-4 py-2 text-right font-semibold" colspan="2">TAX RATE</td>
             <td class="border border-black px-4 py-2 font-bold">5.00%</td>
         </tr>
         <tr>
             <td colspan="2" class="border border-black text-end font-bold">Min Price</td>
-            <td class="border border-black px-4 py-2">${{ number_format($minPrice, 2) }}</td>
+            <td class="border border-black px-4 py-2">
+                <div class="flex justify-between">
+                    <span>$</span>
+                    <span>{{ number_format($minPrice, 2) }}</span>
+                </div>
+            </td>
             <td class="border border-black px-4 py-2 text-right font-semibold" colspan="2">TAX</td>
-            <td class="border border-black px-4 py-2">${{ number_format($tax, 2) }}</td>
+            <td class="border border-black px-4 py-2">
+                <div class="flex justify-between">
+                    <span>$</span>
+                    <span>{{ number_format($tax, 2) }}</span>
+                </div>
+            </td>
         </tr>
         <tr>
             <td colspan="2" class="border border-black text-end font-bold">Total Price</td>
-            <td class="border border-black px-4 py-2">${{ number_format($subtotal, 2) }}</td>
+            <td class="border border-black px-4 py-2">
+                <div class="flex justify-between">
+                    <span>$</span>
+                    <span>{{ number_format($subtotal, 2) }}</span>
+                </div>
+            </td>
             <td class="border border-black px-4 py-2 text-right text-blue-600 font-bold" colspan="2">TOTAL</td>
-            <td class="border border-black px-4 py-2">${{ number_format($total, 2) }}</td>
+            <td class="border border-black px-4 py-2">
+                <div class="flex justify-between">
+                    <span>$</span>
+                    <span>{{ number_format($total, 2) }}</span>
+                </div>
+            </td>
         </tr>
         </tfoot>
     </table>
