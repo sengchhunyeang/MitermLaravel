@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 
 class Midterm_controller extends Controller
 {
-     // This method returns the 'midterm' view without passing any data
+    // This method returns the 'midterm' view without passing any data
     public function showMidterm(){
-        // The 'midterm' view is loaded when the showMidterm method is called.
+        // You can still return the view without passing any data
         return view('midterm');
     }
-    // This method prepares some data (items) and passes it to the 'midterm' view.
+
+    // This method prepares some data (items) and passes it to the 'midterm' view
     public function passingData(){
+        // Data for items
         $items = [
             [
                 'ID' => 1,
@@ -22,7 +24,7 @@ class Midterm_controller extends Controller
                 'discount' => 7,
             ],
             [
-                'ID' => 2,
+        git        'ID' => 2,
                 'name' => 'Keyboard',
                 'qty' => 12,
                 'unitPrice' => 20.00,
@@ -58,13 +60,26 @@ class Midterm_controller extends Controller
             ],
         ];
 
-        // Passing the $items array to the 'midterm' view using the compact function
-        return view('midterm', compact('items'));
+        // Calculate subtotal, max price, min price, tax, and total
+        $subtotal = 0;
+        $maxPrice = PHP_INT_MIN;
+        $minPrice = PHP_INT_MAX;
+
+        foreach ($items as $item) {
+            $amount = $item['qty'] * $item['unitPrice'] * (1 - $item['discount'] / 100);
+            $subtotal += $amount;
+
+            // Update max and min price
+            $maxPrice = max($maxPrice, $item['unitPrice']);
+            $minPrice = min($minPrice, $item['unitPrice']);
+        }
+
+        // Tax rate and total calculation
+        $taxRate = 0.05; // 5%
+        $tax = $subtotal * $taxRate;
+        $total = $subtotal + $tax;
+
+        // Passing data to the 'midterm' view
+        return view('midterm', compact('items', 'subtotal', 'maxPrice', 'minPrice', 'taxRate', 'tax', 'total'));
     }
-    //        $id="1";
-//        $mouse = "Mouse";
-//        $qty= 20;
-//        $unitPrice= 10.00;
-//        $discount=7;
-//        return view('midterm', compact('id', 'mouse', 'qty', 'unitPrice', 'discount'));
 }

@@ -43,24 +43,6 @@
         @endforeach
         </tbody>
         <tfoot class="text-end">
-        @php
-        $subtotal = 0;
-        $maxPrice = PHP_INT_MIN;
-        $minPrice = PHP_INT_MAX;
-
-        foreach ($items as $item) {
-        $amount = $item['qty'] * $item['unitPrice'] * (1 - $item['discount'] / 100);
-        $subtotal += $amount;
-
-        // Update max and min price
-        $maxPrice = max($maxPrice, $item['unitPrice']);
-        $minPrice = min($minPrice, $item['unitPrice']);
-        }
-
-        $taxRate = 0.05; // 5%
-        $tax = $subtotal * $taxRate;
-        $total = $subtotal + $tax;
-        @endphp
         <tr>
             <td colspan="3" class="border border-black text-center font-bold text-black bg-blue-500">Thank you for your business!</td>
             <td class="border border-black px-4 py-2 text-right font-semibold" colspan="2">Subtotal</td>
